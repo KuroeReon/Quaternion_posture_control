@@ -1,4 +1,4 @@
-struct Quaternion {
+pub struct Quaternion {
     w: f32, //実部
     x: f32, //虚部i
     y: f32, //虚部j
@@ -9,10 +9,10 @@ impl Quaternion {
     // コンストラクタ
     pub fn new(w: f32, x: f32, y: f32, z: f32) -> Self {
         Self {
-            w: w,
-            x: x,
-            y: y,
-            z: z
+            w,
+            x,
+            y,
+            z,
         }
     }
     // クオータニオン積の定義
@@ -56,13 +56,13 @@ impl Quaternion {
     }
     //クオータニオンのノルムの計算
     fn norm(&self) -> f32 {
-        let squared_norm = self.w ** 2 + self.x ** 2 + self.y ** 2 + self.z ** 2;
+        let squared_norm = self.w * self.w + self.x * self.x + self.y * self.y + self.z * self.z;
         let norm: f32 = squared_norm.sqrt();
         return norm;
     }
     //クオータニオンの正規化
     pub fn normalize(&mut self) {
-        norm = norm(self);
+        let norm: f32 = self.norm();
         self.w /= norm;
         self.x /= norm;
         self.y /= norm;
