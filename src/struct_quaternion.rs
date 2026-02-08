@@ -1,8 +1,8 @@
 pub struct Quaternion {
-    w: f32, //実部
-    x: f32, //虚部i
-    y: f32, //虚部j
-    z: f32, //虚部k
+    pub w: f32, //実部
+    pub x: f32, //虚部i
+    pub y: f32, //虚部j
+    pub z: f32, //虚部k
 }
 
 impl Quaternion {
@@ -38,11 +38,14 @@ impl Quaternion {
         return result;
     }
     //クオータニオンのスカラー倍の定義
-    pub fn scale(&mut self, scalar: f32) {
-        self.w *= scalar;
-        self.x *= scalar;
-        self.y *= scalar;
-        self.z *= scalar;
+    pub fn scale(&self, scalar: f32) -> Self {
+        let result: Quaternion = Quaternion {
+            w: self.w * scalar,
+            x: self.x * scalar,
+            y: self.y * scalar,
+            z: self.z * scalar,
+        };
+        return result;
     }
     //クオータニオンの共役の定義
     pub fn conjugate(&self) -> Self {
@@ -61,13 +64,16 @@ impl Quaternion {
         return norm;
     }
     //クオータニオンの正規化
-    pub fn normalize(&mut self) {
+    pub fn normalize(&self) -> Self {
         let norm: f32 = self.norm();
-        self.w /= norm;
-        self.x /= norm;
-        self.y /= norm;
-        self.z /= norm;
-    }
+        let result= Quaternion {
+            w: self.w / norm,
+            x: self.x / norm,
+            y: self.y / norm,
+            z: self.z / norm,
+        };
+        return result;
+    }   
     //クオータニオンの表示
     pub fn print(&self) {
         println!("({}, {}, {}, {})", self.w, self.x, self.y, self.z)
