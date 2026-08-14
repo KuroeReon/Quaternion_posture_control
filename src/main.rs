@@ -8,7 +8,7 @@ fn main() {
     let dt = 0.01;
     let mut qs: Vec<Quaternion> = Vec::new();
     let mut angulars: Vec<Quaternion> = Vec::new();
-    angulars.resize_with(101, || Quaternion::new(0.0, 2.0 * PI, 0.0, 0.0));
+    angulars.resize_with(101, || Quaternion::new(0.0,  0.0, 0.1 * PI, 0.0));
 
     qs.push(Quaternion::new(1.0, 0.0, 0.0, 0.0));
 
@@ -16,9 +16,8 @@ fn main() {
         rungekutta(&angulars, &mut qs, n, dt);
     }
     for (i, q) in qs.iter().enumerate() {
-        println!("Step {}: w={}, x={}, y={}, z={}", i, q.w, q.x, q.y, q.z);
+        println!("new Quaternion({}f, {}f, {}f, {}f),", q.w, q.x, q.y, q.z);
     }
-
     /*
     let q1_theta: f32 = PI / 4.0;
     let q1 = &mut Quaternion::new(q1_theta.cos(), 0.0, q1_theta.sin(), 0.0);
